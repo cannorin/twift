@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{f2a71f9b-5d33-465a-a702-920d77279786}") = "Twift", "Twift\Twift.fsproj", "{CE62957F-0E95-402C-BAE7-E6930F085A61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.Options.Wrapper", "Mono.Options.Wrapper\Mono.Options.Wrapper.csproj", "{ACCE29C0-A90A-4C92-B774-227262D9E422}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACCE29C0-A90A-4C92-B774-227262D9E422}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{ACCE29C0-A90A-4C92-B774-227262D9E422}.Debug|x86.Build.0 = Debug|Any CPU
+		{ACCE29C0-A90A-4C92-B774-227262D9E422}.Release|x86.ActiveCfg = Release|Any CPU
+		{ACCE29C0-A90A-4C92-B774-227262D9E422}.Release|x86.Build.0 = Release|Any CPU
+		{CE62957F-0E95-402C-BAE7-E6930F085A61}.Debug|x86.ActiveCfg = Debug|x86
+		{CE62957F-0E95-402C-BAE7-E6930F085A61}.Debug|x86.Build.0 = Debug|x86
+		{CE62957F-0E95-402C-BAE7-E6930F085A61}.Release|x86.ActiveCfg = Release|x86
+		{CE62957F-0E95-402C-BAE7-E6930F085A61}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+EndGlobal

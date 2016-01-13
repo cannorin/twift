@@ -17,6 +17,20 @@ FILE. (two comma-separated ids, no spaces)
 * -v, --verbose              Show detailed log.
 * -s, --share                Tweet or DM two ids to specify sent file.
 * -t, --setup                Setup Twitter account
+ 
+# Requires
+
+## *nix
+
+* mono 3.0 or above
+* fsharp
+* curl
+
+## Windows
+
+* .NET 4.5 or above
+* Visual Studio 2012 or above
+* fsharp
 
 # Examples
 

@@ -56,9 +56,9 @@ module Main =
                                     (is.[0], is.[1])
                                  | _ -> Exception "Ids must be comma-separated and no spaces." |> raise
       )) |> ignore
-      o.Add("v|verbose", "Show detailed log.", (fun _ -> Settings.isVerbose := true)) |> ignore
-      o.Add("s|share", "Tweet or DM two ids to specify sent file.", (fun _ -> Settings.doesShare := true)) |> ignore
-      o.Add("t|setup", "Setup Twitter account", (fun _ -> getTokens () |> ignore)) |> ignore
+      o.Add("q|quiet", "DOES NOT show detailed log.", (fun _ -> Settings.isVerbose := false)) |> ignore
+      o.Add("n|noshare", "DOES NOT tweet or DM two ids to specify the sent file.", (fun _ -> Settings.doesShare := false)) |> ignore
+      o.Add("t|setup", "Setup Twitter account.", (fun _ -> getTokens () |> ignore)) |> ignore
 
       let fs = o.Parse argv in
 
@@ -81,11 +81,6 @@ module Main =
             File.WriteAllBytes(f, bs)
             printfn "%i bytes written: %s" bs.Length f
 
-          | (true, false) ->
-            let bs = receiveByTweet t !Settings.receiveIds in
-            File.WriteAllBytes(f, bs)
-            printfn "%i bytes written: %s" bs.Length f
-
           | (false, true) ->
             let bs = File.ReadAllBytes f in
             let (i1, i2) = sendByDm t !Settings.dmTarget bs in
@@ -94,13 +89,24 @@ module Main =
               let un = t.Account.VerifyCredentials().ScreenName in
               t.DirectMessages.New(!Settings.dmTarget, (sprintf "Just shared %s by @tw1ft! $ twift -d %s -r %i,%i %s to receive." f un i1 i2 f)) |> ignore 
             printfn "Completed: %i,%i" i1 i2
+
+          | (_, false) -> 
+            printfn "Sorry, this feature is disabled until 10000 charactors tweets become available.";
+            printfn "Use -d instead."
+
+          | (true, false) ->
+            let bs = receiveByTweet t !Settings.receiveIds in
+            File.WriteAllBytes(f, bs)
+            printfn "%i bytes written: %s" bs.Length f
+           
           | (false, false) ->
             let bs = File.ReadAllBytes f in
             let (i1, i2) = sendByTweet t bs in
             if !Settings.doesShare then
               let f = Path.GetExtension f in
-              t.Statuses.Update(status= sprintf "Just shared a.%s by @tw1ft! $ twift -r %i,%i a.%s to receive." f i1 i2 f) |> ignore 
+              t.Statuses.Update(status= sprintf "Just shared a%s by @tw1ft! $ twift -r %i,%i a.%s to receive." f i1 i2 f) |> ignore 
             printfn "Completed: %i,%i" i1 i2
+
         0
 
     [<EntryPoint>]

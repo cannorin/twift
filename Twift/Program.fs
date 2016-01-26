@@ -28,7 +28,11 @@ module Main =
           let ss = x.ReadObject y :?> string [] in
           Tokens.Create(ss.[0], ss.[1], ss.[2], ss.[3])
       else
-        let se = OAuth.Authorize ("JuTftntaYp9ey92DDYmZNBwYy", "Tlk25t18SYj9Ib9aYgIiRsC32CbO2lljJiv91g4HdeyhgP9olm") in
+        Console.Write "Consumer key> "
+        let ck = Console.ReadLine ()
+        Console.Write "Consumer secret> "
+        let cs = Console.ReadLine ()
+        let se = OAuth.Authorize (ck, cs) in
         Console.WriteLine ("Open: " + se.AuthorizeUri.ToString ())
         Console.Write "PIN> "
         let g = se.GetTokens (Console.ReadLine()) in
